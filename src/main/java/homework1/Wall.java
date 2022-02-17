@@ -20,12 +20,14 @@ public class Wall implements Obstacles {
     }
 
     @Override
-    public void passObstacle(Participants p) {
+    public boolean passObstacle(Participants p) {
         System.out.println("Jump over the wall!");
         if(getHeight() <= p.jump()) {
             System.out.println(p.doIt(true) + " the wall!");
+            return true;
         } else {
             System.out.println(p.doIt(false) + " the wall!");
+            return false;
         }
     }
 }
