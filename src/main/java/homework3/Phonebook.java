@@ -12,7 +12,7 @@ public class Phonebook {
         if(phoneBook.containsValue(surname)){
             for(String contact : phoneBook.keySet()) {
                 if(phoneBook.get(contact).equals(surname)){
-                    System.out.println(contact);
+                    System.out.println(surname + ": " + contact);
                 }
             }
         } else {
