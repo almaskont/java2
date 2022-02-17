@@ -8,10 +8,11 @@ public class Phonebook {
     public void add(String surname, String number) {
         phoneBook.put(number, surname);
     }
+
     public void get(String surname) {
-        if(phoneBook.containsValue(surname)){
-            for(String contact : phoneBook.keySet()) {
-                if(phoneBook.get(contact).equals(surname)){
+        if (phoneBook.containsValue(surname)) {
+            for (String contact : phoneBook.keySet()) {
+                if (phoneBook.get(contact).equals(surname)) {
                     System.out.println(surname + ": " + contact);
                 }
             }

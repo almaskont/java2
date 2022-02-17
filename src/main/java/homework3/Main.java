@@ -3,11 +3,15 @@ package homework3;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        firstTask();
+
+        secondTask();
+    }
+
+    private static void firstTask() {
         ArrayList<String> words = new ArrayList<>();
         Collections.addAll(words, "cow", "cat", "dog", "horse", "pig",
                 "sheep", "cow", "cow", "chicken", "chicken", "chicken", "pig");
@@ -17,10 +21,12 @@ public class Main {
         HashSet<String> nonDuplicateWords = new HashSet<>(words);
         System.out.println("Using Set: " + nonDuplicateWords.size());
 
-        for(String s : words.stream().distinct().collect(Collectors.toList())) {
+        for (String s : nonDuplicateWords) {
             System.out.println(s + ": " + words.stream().filter(e -> e.equals(s)).count());
         }
+    }
 
+    private static void secondTask() {
         Phonebook pb = new Phonebook();
 
         pb.add("Lee", "123456");
