@@ -19,12 +19,14 @@ public class Treadmill implements Obstacles {
     }
 
     @Override
-    public void passObstacle(Participants p) {
+    public boolean passObstacle(Participants p) {
         System.out.println("Run through treadmill!");
         if(getLength() <= p.run()) {
             System.out.println(p.doIt(true) + " treadmill!");
+            return true;
         } else {
             System.out.println(p.doIt(false) + " treadmill!");
+            return false;
         }
     }
 }

@@ -31,12 +31,12 @@ public class Human implements Participants{
 
     @Override
     public int run() {
-        return 0;
+        return this.speed;
     }
 
     @Override
     public int jump() {
-        return 0;
+        return this.jump;
     }
 
     @Override
