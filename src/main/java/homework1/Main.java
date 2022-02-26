@@ -9,11 +9,13 @@ public class Main {
         Robot robot = new Robot();
         Wall wall = new Wall();
         Treadmill treadmill = new Treadmill();
+        Wall wall1 = new Wall(3);
         Participants[] participants = {human, cat, robot};
-        Obstacles[] obstacles = {wall, treadmill};
+        Obstacles[] obstacles = {wall, treadmill, wall1};
         for(int i = 0; i < participants.length; i++) {
             for(int j = 0; j < obstacles.length; j++) {
-                obstacles[j].passObstacle(participants[i]);
+                if(!obstacles[j].passObstacle(participants[i]))
+                    break;
             }
         }
     }
