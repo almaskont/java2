@@ -4,35 +4,37 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int size = 100000000;
+        int size = 10000000;
         System.out.println("Without thread");
-        first(size);
+        float[] arr1 = first(size);
         System.out.println("With a thread");
-        second(size);
+        float[] arr2 = second(size);
+        System.out.println(Arrays.compare(arr1, arr2) == 0 ? "Arrays are equal" : "Arrays are not equal");
     }
 
-    public static void first(int size) {
-        float[] arr = new float[size];
-        Arrays.fill(arr, 1);
+    public static float[] first(int size) {
+        float[] arr1 = new float[size];
+        Arrays.fill(arr1, 1);
         long a = System.currentTimeMillis();
         for (int i = 0; i < size; i++){
-            arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            arr1[i] = (float)(arr1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
         System.out.println(System.currentTimeMillis() - a);
+        return arr1;
     }
 
-    public static void second(int size) {
+    public static float[] second(int size) {
         int h = size/2;
-        float[] arr = new float[size];
+        float[] arr2 = new float[size];
         float[] a1 = new float[h];
         float[] a2 = new float[h];
 
-        Arrays.fill(arr, 1);
+        Arrays.fill(arr2, 1);
 
         long a = System.currentTimeMillis();
 
-        System.arraycopy(arr, 0, a1, 0, h);
-        System.arraycopy(arr, h, a2, 0, h);
+        System.arraycopy(arr2, 0, a1, 0, h);
+        System.arraycopy(arr2, h, a2, 0, h);
 
         Thread t1 = new Thread(() -> {
             for (int i = 0; i < h; i++) {
@@ -41,8 +43,8 @@ public class Main {
         });
 
         Thread t2 = new Thread(() -> {
-            for (int i = 0; i < h; i++) {
-                a2[i] = (float)(a2[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            for (int i = h; i < size; i++) {
+                a2[i-h] = (float)(a2[i-h] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
             }
         });
         t1.start();
@@ -53,8 +55,9 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.arraycopy(a1, 0, arr, 0, h);
-        System.arraycopy(a2, 0, arr, h, h);
+        System.arraycopy(a1, 0, arr2, 0, h);
+        System.arraycopy(a2, 0, arr2, h, h);
         System.out.println(System.currentTimeMillis() - a);
+        return arr2;
     }
 }
